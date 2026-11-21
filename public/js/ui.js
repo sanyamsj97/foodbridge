@@ -160,7 +160,16 @@ export function getGps() {
 export function makeMap(el, center = [20.5937, 78.9629], zoom = 5) {
   if (!window.L) { el.innerHTML = '<p class="muted">Map unavailable (offline).</p>'; return null; }
   const map = window.L.map(el).setView(center, zoom);
-  window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+  // OpenStreetMap tiles, with automatic fallback to Esri World Street Map (no API key) if they fail to load.
+  const osm = window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+  let errors = 0;
+  osm.on('tileerror', () => {
+    errors += 1;
+    if (errors === 3) {
+      map.removeLayer(osm);
+      window.L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors' }).addTo(map);
+    }
+  });
   setTimeout(() => map.invalidateSize(), 50);
   return map;
 }

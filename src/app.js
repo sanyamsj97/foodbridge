@@ -25,7 +25,7 @@ function createApp() {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", 'https://unpkg.com', 'https://www.gstatic.com'],
         styleSrc: ["'self'", "'unsafe-inline'", 'https://unpkg.com'],
-        imgSrc: ["'self'", 'data:', 'blob:', 'https://tile.openstreetmap.org', 'https://unpkg.com'],
+        imgSrc: ["'self'", 'data:', 'blob:', 'https://tile.openstreetmap.org', 'https://*.tile.openstreetmap.org', 'https://server.arcgisonline.com', 'https://unpkg.com'],
         connectSrc: ["'self'", 'https://*.googleapis.com', 'https://www.gstatic.com'],
         workerSrc: ["'self'"],
         frameAncestors: ["'none'"],
@@ -59,7 +59,8 @@ function createApp() {
   app.use('/api', require('./routes/app'));
   app.use('/api', (req, res) => res.status(404).json({ error: 'Not found' }));
 
-  app.use(express.static(path.join(__dirname, '..', 'public'), { extensions: ['html'], maxAge: config.isProd ? '1h' : 0 }));
+  // Always revalidate app files so users never run stale JS after a deploy.
+  app.use(express.static(path.join(__dirname, '..', 'public'), { extensions: ['html'], setHeaders: (res) => res.setHeader('Cache-Control', 'no-cache') }));
   app.use((req, res, next) => (req.method === 'GET' ? res.sendFile(path.join(__dirname, '..', 'public', 'index.html')) : next()));
 
   // eslint-disable-next-line no-unused-vars
