@@ -40,7 +40,7 @@ const system = { id: 'cli', role: 'admin', name: 'Test-account script' };
     }
     out.push([role, email, password]);
   };
-  await make('admin');
+  if (process.argv.includes('--with-admin')) await make('admin'); // admins normally come from npm run create-admin
   await make('donor', { name: 'Test Donor', orgName: 'Test College Mess', orgType: 'college_mess', idType: 'gst', idNumber: 'TEST00001234', idDocument: PDF, ...loc(26.8505, 75.8047) });
   await make('volunteer', { name: 'Test Volunteer', govIdType: 'driving_licence', govIdNumber: 'TESTDL5678', vehicleType: 'two_wheeler', idDocument: IMG, profilePhoto: IMG, ...loc(26.8550, 75.8100) });
   await make('ngo', { name: 'Test NGO Rep', registeredName: 'Test Food Relief Trust', registrationNumber: 'TEST/REG/0001', operatingArea: 'Jaipur', repDesignation: 'Coordinator', fcraApplicable: false, capacityKg: 300, acceptsNonVeg: true, registrationCertificate: PDF, orgPhotos: [IMG], ...loc(26.8600, 75.8150) });
