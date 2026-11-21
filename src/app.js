@@ -25,7 +25,7 @@ function createApp() {
         defaultSrc: ["'self'"],
         scriptSrc: ["'self'", 'https://unpkg.com', 'https://www.gstatic.com'],
         styleSrc: ["'self'", "'unsafe-inline'", 'https://unpkg.com'],
-        imgSrc: ["'self'", 'data:', 'blob:', 'https://*.tile.openstreetmap.org', 'https://unpkg.com'],
+        imgSrc: ["'self'", 'data:', 'blob:', 'https://tile.openstreetmap.org', 'https://unpkg.com'],
         connectSrc: ["'self'", 'https://*.googleapis.com', 'https://www.gstatic.com'],
         workerSrc: ["'self'"],
         frameAncestors: ["'none'"],
@@ -34,6 +34,8 @@ function createApp() {
       },
     },
     hsts: config.isProd,
+    // OpenStreetMap's tile servers require a Referer; send only the origin cross-site.
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
   }));
   app.use(rateLimit({ windowMs: 15 * 60 * 1000, limit: config.isTest ? 100000 : 1500, standardHeaders: 'draft-7', legacyHeaders: false }));
   app.use(express.json({ limit: '10mb' }));

@@ -160,7 +160,7 @@ export function getGps() {
 export function makeMap(el, center = [20.5937, 78.9629], zoom = 5) {
   if (!window.L) { el.innerHTML = '<p class="muted">Map unavailable (offline).</p>'; return null; }
   const map = window.L.map(el).setView(center, zoom);
-  window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+  window.L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
   setTimeout(() => map.invalidateSize(), 50);
   return map;
 }
