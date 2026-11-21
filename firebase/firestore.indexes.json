@@ -1,0 +1,15 @@
+{
+  "indexes": [
+    { "collectionGroup": "notifications", "queryScope": "COLLECTION", "fields": [ { "fieldPath": "userId", "order": "ASCENDING" }, { "fieldPath": "createdAt", "order": "DESCENDING" } ] },
+    { "collectionGroup": "notifications", "queryScope": "COLLECTION", "fields": [ { "fieldPath": "userId", "order": "ASCENDING" }, { "fieldPath": "read", "order": "ASCENDING" } ] },
+    { "collectionGroup": "audit_logs", "queryScope": "COLLECTION", "fields": [ { "fieldPath": "entityId", "order": "ASCENDING" }, { "fieldPath": "at", "order": "DESCENDING" } ] },
+    { "collectionGroup": "audit_logs", "queryScope": "COLLECTION", "fields": [ { "fieldPath": "actorId", "order": "ASCENDING" }, { "fieldPath": "at", "order": "DESCENDING" } ] },
+    { "collectionGroup": "users", "queryScope": "COLLECTION", "fields": [ { "fieldPath": "role", "order": "ASCENDING" }, { "fieldPath": "status", "order": "ASCENDING" } ] },
+    { "collectionGroup": "volunteer_assignments", "queryScope": "COLLECTION", "fields": [ { "fieldPath": "volunteerId", "order": "ASCENDING" }, { "fieldPath": "status", "order": "ASCENDING" } ] },
+    { "collectionGroup": "volunteer_assignments", "queryScope": "COLLECTION", "fields": [ { "fieldPath": "donationId", "order": "ASCENDING" }, { "fieldPath": "status", "order": "ASCENDING" } ] },
+    { "collectionGroup": "donation_requests", "queryScope": "COLLECTION", "fields": [ { "fieldPath": "donationId", "order": "ASCENDING" }, { "fieldPath": "status", "order": "ASCENDING" } ] }
+  ],
+  "fieldOverrides": [
+    { "collectionGroup": "files", "fieldPath": "data", "indexes": [] }
+  ]
+}

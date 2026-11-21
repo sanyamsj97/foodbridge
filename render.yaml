@@ -1,0 +1,27 @@
+# Render Blueprint – free web service. Secrets are entered in the Render dashboard (sync: false).
+services:
+  - type: web
+    name: foodbridge
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: DB_DRIVER
+        value: firestore
+      - key: FIREBASE_PROJECT_ID
+        value: foodbridge-98390
+      - key: APP_URL
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT_BASE64
+        sync: false
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: OTP_ENCRYPTION_KEY
+        generateValue: true

@@ -1,0 +1,33 @@
+{
+  "name": "foodbridge",
+  "version": "1.0.0",
+  "description": "FoodBridge – Food Rescue & Donation Management System (Node.js + Firebase Firestore, Spark plan compatible)",
+  "main": "src/server.js",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test tests/",
+    "create-admin": "node scripts/create-admin.js",
+    "create-test-accounts": "node scripts/create-test-accounts.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^18.0.10",
+    "exceljs": "^4.4.0",
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.5",
+    "firebase-admin": "^14.5.1",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "pdfkit": "^0.21.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "supertest": "^7.3.2"
+  }
+}
